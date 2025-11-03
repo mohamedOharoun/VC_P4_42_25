@@ -1,0 +1,10 @@
+============================================================
+Proceso completado
+Objetos únicos detectados:
+bus: 2
+car: 182
+person: 39
+truck: 24
+motorcycle: 4
+Matrículas detectadas: 197
+============================================================
