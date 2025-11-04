@@ -50,8 +50,7 @@ El sistema puede procesar vídeos propios o el vídeo ejemplo proporcionado en l
 
 ---
 
-
-
-
-
 ## Tarea II
+
+
+https://github.com/user-attachments/assets/a1adb621-ea52-451d-9fcd-e1c7b9bfc8cc
