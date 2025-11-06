@@ -7,7 +7,14 @@
 Esta práctica trata del aprendizaje y puesta en uso de los modelos de detección en una fase (YOLO), y del aprendizaje y uso de los modelos OCR para la detección de texto.
 
 ## Entorno y librerías
-Para el funcionamiento de esta práctica será necesario tener mucha paciencia para instalar todas las dependencias necesarias en el o los entornos. 
+Para el funcionamiento de esta práctica será necesario tener mucha paciencia para instalar todas las dependencias necesarias en el o los entornos.
+
+```bash
+conda create -n VC_P4 python=3.10.19 -y
+conda activate VC_P4
+conda install pytorch torchvision pytorch-cuda=12.4 -c pytorch -c nvidia -y
+conda install -c conda-forge ultralytics opencv pandas easyocr pillow -y
+```
 
 ## Tarea I
 Este proyecto desarrolla un prototipo para el procesamiento de vídeo que permite:
