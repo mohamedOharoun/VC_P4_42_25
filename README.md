@@ -108,8 +108,6 @@ En conclusión, el modelo Nano parece ser ligeramente mejor, dudando menos en et
 
 ## Tarea II
 
-# Tarea II
-
 Mientras que la Tarea I se centró en la detección y seguimiento de objetos (vehículos, personas y matrículas) usando YOLOv11, esta tarea aborda un desafío más específico: el **Reconocimiento Óptico de Caracteres (OCR)**.
 
 Como se observó en los resultados de la Tarea I, los modelos YOLO son excelentes para *localizar* la matrícula, pero no para *leer* el texto que contiene. La Tarea II se enfoca en implementar, entrenar y comparar modelos diseñados específicamente para leer el texto de las matrículas detectadas.
@@ -511,3 +509,32 @@ df = pd.DataFrame(data_rows)
 df.to_csv("comparacion_ocr_v3_yolo11n.csv", index=False)
 print("Comparación completada.")
 ```
+
+## Análisis y comparativa de resultados
+Este es un breve análisis comparativo del **rendimiento de detección** (la tasa de lecturas no nulas) de los diferentes métodos de OCR (EasyOCR, CRNN_Custom, Tesseract) basado en los tres archivos CSV proporcionados.
+
+### Tasa de Lecturas (No Nulas vs. Placeholder '0')
+
+La siguiente tabla resume cuántas lecturas válidas (definidas como una salida no nula o, en el caso del archivo antiguo, una salida que no sea `0`) produjo cada método.
+
+| Archivo / Modelo | Total de Filas | Lecturas EasyOCR | Lecturas CRNN_Custom | Lecturas Tesseract |
+| :--- | :---: | :---: | :---: | :---: |
+| `...yolo11n.csv` (YOLOv11 Nano) | 172 | 98 (57.0%) | 172 (100.0%) | N/A |
+| `...yolo11s.csv` (YOLOv11 Small) | 254 | 28 (11.0%) | 254 (100.0%) | N/A |
+| `...tessaract.csv` (Antigua) | 204 | 106 (52.0%) | 0 (0.0%) | 0 (0.0%) |
+
+---
+
+### Conclusiones Clave
+
+1.  **Rendimiento de `CRNN_Custom`:** Este modelo muestra dos comportamientos completamente diferentes:
+    * En las pruebas con **YOLO (`...yolo11n.csv` y `...yolo11s.csv`)**, tiene una tasa de respuesta del 100%. Esto significa que *siempre* devuelve un valor.
+    * En la prueba **`...tessaract.csv` (Antigua)**, el modelo usaba `0` como valor "placeholder" (marcador de posición) para indicar "no lectura", resultando en 0 lecturas válidas.
+
+2.  **Rendimiento de `EasyOCR`:** El rendimiento de `EasyOCR` parece depender en gran medida del detector de matrículas utilizado.
+    * Tuvo su peor rendimiento con el detector `YOLOv11s` (solo un 11.0% de lecturas).
+    * Tuvo un rendimiento moderado con `YOLOv11n` (57.0%) y con el detector del archivo "Antiguo" (52.0%).
+
+3.  **Rendimiento de `Tesseract`:** En el conjunto de datos "Antiguo" donde fue probado, `Tesseract` no produjo **ninguna** lectura válida (0%).
+
+4.  **Tasa de Respuesta vs. Precisión:** Es importante notar que una "tasa de lectura" del 100% (como la de `CRNN_Custom` en los archivos YOLO) no implica un 100% de *precisión*. Simplemente significa que el modelo siempre genera una salida. Por el contrario, `EasyOCR` parece devolver un valor solo cuando detecta una matrícula con un nivel de confianza suficiente.
