@@ -105,7 +105,32 @@ https://github.com/user-attachments/assets/80efb0a0-a7bf-4410-aa46-5cc0171ca758
 | motorcycle   | 5        | 4        |
 | Matrículas   | 187      | 197      |
 
+### Análisis Entrenamiento YOLOv11s
+
+![Gráficos entrenamiento YOLOv11s](results/task_A/graph_yolo11s.png)
+
+#### Detalle de Pérdidas
+- Las pérdidas de entrenamiento (`train/box_loss`, `train/cls_loss`, `train/dfl_loss`) bajan rápido y se estabilizan, indicando que el modelo aprende bien sobre los datos de entrenamiento.
+- Las pérdidas de validación (`val/box_loss`, `val/cls_loss`, `val/dfl_loss`) descienden al inicio, pero luego suben abruptamente, mostrando divergencia respecto al entrenamiento y señal clara de mala generalización.
+
+#### Overfitting
+- Existe **overfitting** evidente: el modelo aprende a memorizar el set de entrenamiento y deja de generalizar, lo cual se manifiesta en el incremento de las pérdidas de validación y caída de métricas como precisión y mAP tras unas pocas épocas.
+
+#### Early Stopping
+- Para intentar evitar este sobreajuste, se hizo uso de **early stopping**; detener el entrenamiento antes de que las pérdidas de validación aumenten, guardando el mejor modelo según desempeño validado. No obstante, incluso con un `patience=6` el modelo no fue capaz de mejorar 
+
+
+### Análisis Entrenamiento YOLOv11n
+
+![Gráficos entrenamiento YOLOv11s](results/task_A/graph_yolo11n.png)
+
+Durante las primeras épocas, las pérdidas de entrenamiento (box, cls y dfl) caen con rapidez desde valores altos y luego se mantienen muy bajas y estables, lo que indica que el modelo está aprendiendo a ajustar los datos de entrenamiento correctamente. Sin embargo, las pérdidas en el conjunto de validación descienden también al principio pero a partir de la época 5 empiezan a subir de forma continua y pronunciada; esto significa que el modelo deja de generalizar y comienza a memorizar excesivamente los datos de entrenamiento.
+
+Las métricas de precisión, recall y mAP tienen un comportamiento muy irregular: alcanzan valores altos en las primeras épocas pero decaen después, mostrando alta variabilidad y caída en la capacidad predictiva una vez empieza el sobreajuste. Esto es un síntoma adicional de que el modelo no está generalizando correctamente y de que hay sobreajuste respecto al set de entrenamiento.
+
 En conclusión, el modelo Nano parece ser ligeramente mejor, dudando menos en etiquetar una instancia y haciendo un buen seguimiento a diferencia del modelo Small. En ocasiones, el modelo Small parecee estar detectando matrículas fantasmas, o de alguna manera residuales de coches que ya pasaron. No obstante, se nota alguna mejoría con respecto al Nano, pues con instancias a lejanas distancias hace un mejor tracking y no duda tanto. De manera general, parece que el IoU ayuda, aunque no demasiado, a no perder la pista de los coches y redectarlos con su ID inicial, siendo este el mayor problema de la práctica. En cómputo total, parece que el Nano ha realizado un mejor trabajo, y sorprendentemente, parece ser más fiable. En la tarea II, veremos más notablemente la importancia de detectar correctamente las matrículas para su posterior lectura.
+
+Como crítica constructiva, se podría decir que el modelo aprende muy rápido al principio pero las curvas evidencian que, tras pocas épocas, empieza a sobreajustar. La validación empeora y las métricas caen, lo que corrobora que el entrenamiento no está produciendo un modelo robusto para datos nuevos. Sería necesario revisar el dataset con imágenes mucho más variadas (distancia de la cámara a la matrícula) y aplicar distinta data augmentation.
 
 ---
 
