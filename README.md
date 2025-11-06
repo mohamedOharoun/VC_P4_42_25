@@ -89,7 +89,10 @@ if cls in VEHICLE_CLASSES:
 ```
 
 ## Resultados
-https://github.com/user-attachments/assets/a1adb621-ea52-451d-9fcd-e1c7b9bfc8cc
+
+https://github.com/user-attachments/assets/80efb0a0-a7bf-4410-aa46-5cc0171ca758
+
+
 
 ### Detecciones realizadas - Conteo de clases
 
