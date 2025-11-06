@@ -124,7 +124,7 @@ Para ello, se utilizan dos *notebooks*:
 
 Este *notebook* detalla el proceso completo de creación de un modelo OCR propio, especializado en la lectura de matrículas españolas.
 
-#### 📚 Librerías Empleadas
+#### Librerías Empleadas
 * **torch / torchvision**: El framework principal para construir y entrenar la red neuronal.
     * `pip install torch torchvision`
 * **pandas**: Utilizado para cargar y gestionar las etiquetas (el texto de cada matrícula) desde el archivo `gt.txt`.
