@@ -566,3 +566,19 @@ La siguiente tabla resume cuántas lecturas válidas (definidas como una salida 
 3.  **Rendimiento de `Tesseract`:** En el conjunto de datos "Antiguo" donde fue probado, `Tesseract` no produjo **ninguna** lectura válida (0%).
 
 4.  **Tasa de Respuesta vs. Precisión:** Es importante notar que una "tasa de lectura" del 100% (como la de `CRNN_Custom` en los archivos YOLO) no implica un 100% de *precisión*. Simplemente significa que el modelo siempre genera una salida. Por el contrario, `EasyOCR` parece devolver un valor solo cuando detecta una matrícula con un nivel de confianza suficiente.
+
+5. Comparativa en rendimiento
+Se puede comprobar que el OCR propio tiene tiempos de respuestas más rápidos, sin embargo, como se ha visto anteriormente, sus resultados son significativamente inferiores o peores.
+
+| **Métrica**                            | **Valor**            |
+|----------------------------------------|-----------------------|
+| Detecciones procesadas                 | 172                   |
+| Tiempo promedio EasyOCR (exitosos)     | 21.80 ms              |
+| Tiempo promedio CRNN (exitosos)        | 7.39 ms               |
+| Tiempo total EasyOCR (suma total)      | 3.75 segundos         |
+| Tiempo total CRNN (suma total)         | 1.27 segundos         |
+| **Comparativa de rendimiento**         | CRNN usa ~66% menos tiempo que EasyOCR |
+
+En la siguiente gráfica, a parte de mostrar el mayor tiempo de respuesta en el EasyOCR, también se puede comprobar que existe una mayor variabilidad en los distintos resultados.
+
+![Gráfico comparación de tiempos](results/task_B/comparacion_tiempos_ocr.png)
