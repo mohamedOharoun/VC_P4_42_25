@@ -89,7 +89,10 @@ if cls in VEHICLE_CLASSES:
 ```
 
 ## Resultados
-https://github.com/user-attachments/assets/a1adb621-ea52-451d-9fcd-e1c7b9bfc8cc
+
+https://github.com/user-attachments/assets/80efb0a0-a7bf-4410-aa46-5cc0171ca758
+
+
 
 ### Detecciones realizadas - Conteo de clases
 
@@ -510,10 +513,10 @@ df.to_csv("comparacion_ocr_v3_yolo11n.csv", index=False)
 print("Comparación completada.")
 ```
 
-## Análisis y comparativa de resultados
+### Análisis y comparativa de resultados
 Este es un breve análisis comparativo del **rendimiento de detección** (la tasa de lecturas no nulas) de los diferentes métodos de OCR (EasyOCR, CRNN_Custom, Tesseract) basado en los tres archivos CSV proporcionados.
 
-### Tasa de Lecturas (No Nulas vs. Placeholder '0')
+#### Tasa de Lecturas (No Nulas vs. Placeholder '0')
 
 La siguiente tabla resume cuántas lecturas válidas (definidas como una salida no nula o, en el caso del archivo antiguo, una salida que no sea `0`) produjo cada método.
 
@@ -525,7 +528,7 @@ La siguiente tabla resume cuántas lecturas válidas (definidas como una salida 
 
 ---
 
-### Conclusiones Clave
+#### Conclusiones Clave
 
 1.  **Rendimiento de `CRNN_Custom`:** Este modelo muestra dos comportamientos completamente diferentes:
     * En las pruebas con **YOLO (`...yolo11n.csv` y `...yolo11s.csv`)**, tiene una tasa de respuesta del 100%. Esto significa que *siempre* devuelve un valor.
